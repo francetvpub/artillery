@@ -328,12 +328,12 @@ function runScenario(script, intermediate, runState) {
     runState.scenarioEvents.on('match', function() {
       intermediate.addMatch();
     });
-    runState.scenarioEvents.on('response', function(delta, code, uid) {
+    runState.scenarioEvents.on('response', function(delta, code, uid, url, requestTime) {
       intermediate.completedRequest();
       intermediate.addLatency(delta);
       intermediate.addCode(code);
 
-      let entry = [Date.now(), uid, delta, code];
+      let entry = [Date.now(), uid, delta, code, url, requestTime];
       intermediate.addEntry(entry);
 
       runState.pendingRequests--;
